@@ -13,7 +13,7 @@ Asegúrate de tener las siguientes herramientas instaladas en tu máquina antes 
   ```bash
   npm install -g @angular/cli
 
-  git clone https://https://github.com/eliesergr/pokedex
+  git clone https://https://github.com/eliesergr/pokedex.git
 
 
 ## Servidor de desarrollo
@@ -24,8 +24,10 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue hasta `http://localho
 
 Ejecute `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`.
 
-## Ejecutar pruebas unitarias
+## Ejecutar en netlify
 
-Ejecute `ng test` para ejecutar las pruebas unitarias a través de [Karma](https://karma-runner.github.io).
+https://jolly-stardust-9b4626.netlify.app
+
+
 
 
