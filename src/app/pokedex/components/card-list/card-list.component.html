@@ -1,0 +1,42 @@
+<div class="container mb-10">
+  <!-- Fila de tarjetas de Pokémon -->
+  <div class="row g-3">
+    <div *ngFor="let pokemon of pokemonsWithImages" class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card custom-card animate_animated animate__fadeIn mb-2 text-center bg-dark fadein">
+        <img  
+          [src]="pokemon?.image | security" [alt]="pokemon?.name"   
+          class="cursor custom-card-img" 
+          (click)="loadPokemonData(pokemon.name)"            
+        >
+        
+        <div class="card-body text-white">
+          <h5>
+            {{ pokemon?.name | uppercase }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <hr class="custom-hr">
+
+  <!-- Controles de paginación -->
+  <div class="mb-5">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between">
+        <button class="btn btn-primary btn-smaller" 
+          [disabled]="previousDisabled" 
+          (click)="onPrevious()"
+          style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+          <i class="fas fa-arrow-left btn-icon"></i> 
+        </button>
+        <button class="btn btn-primary btn-smaller"
+          (click)="onNext()"
+          style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+           <i class="fas fa-arrow-right btn-icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

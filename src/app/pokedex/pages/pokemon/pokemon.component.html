@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+      <h1 style="margin-top: 80px;">POKEMON: <img [src]="animation | security" alt=""><small>{{name | uppercase}}</small></h1>
+      <img [src]="image | security" [alt]="name" style="margin-top: 20px;">
+    </div>
+    <div class="col-md-6 col-sm-12" style="margin-top: 50px;">
+      <h1 style="margin-top: 20px;">Descripcion</h1>
+      <h5 style="margin-top: 20px;">{{description}}</h5>
+      <h1 style="margin-top: 20px;">Especie</h1>
+      <h5 style="margin-top: 20px;">{{especie}}</h5>
+        <!-- Ataque -->
+        <div class="stat-box" style="background-color: #f8d7da; padding: 15px; border-radius: 8px; margin-top: 20px;">
+            <h1 style="color: #721c24; margin-bottom: 10px;"><small>Ataque</small></h1>
+            <h5 style="color: #721c24; font-size: 24px;"><strong>{{attack}}</strong></h5>
+        </div>
+
+        <!-- Defensa -->
+        <div class="stat-box" style="background-color: #d1ecf1; padding: 15px; border-radius: 8px; margin-top: 20px;">
+            <h1 style="color: #0c5460; margin-bottom: 10px;"><small>Defensa</small></h1>
+            <h5 style="color: #0c5460; font-size: 24px;"><strong>{{defense}}</strong></h5>
+        </div>
+      <h1 style="margin-top: 20px;">Ataque especial</h1>
+      <h5 style="margin-top: 20px;">{{specialAttack}}</h5>
+      <h1 style="margin-top: 20px;">Velocidad</h1>
+      <h5 style="margin-top: 20px;">{{speed}}</h5>
+      <h1 style="margin-top: 20px;">Habilidades</h1>
+      <ul style="margin-top: 20px;">
+        <li *ngFor="let skill of skills"><h5>{{ skill }}</h5></li>
+      </ul>
+    </div>
+
+    <div class="col-md-12">
+        <h1 style="margin-top: 30px;">Movimientos</h1>
+        <div class="d-flex flex-wrap" style="margin-top: 20px;">
+          <span *ngFor="let mov of moves" class="mov-item d-inline-flex align-items-center me-3">
+            <h5 class="mb-0">{{ mov }}</h5>
+            <!-- <span class="separator">|</span> -->
+          </span>
+        </div>
+      </div>
+      
+      
+  </div>
+  
