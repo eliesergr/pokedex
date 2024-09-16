@@ -39,7 +39,7 @@ Asegúrese de tener las siguientes herramientas instaladas en tu máquina antes 
   ```bash
   npm install -g @angular/cli@15.2.0
 
-  git clone https://https://github.com/eliesergr/pokedex.git
+  git clone https://github.com/eliesergr/pokedex.git
 
 
 ## Servidor de desarrollo
