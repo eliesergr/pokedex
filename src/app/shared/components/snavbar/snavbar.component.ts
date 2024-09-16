@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, of } from 'rxjs';
 import { PokemonType, Species } from 'src/app/pokedex/interfaces/pokemon.interface';
 import { PokemonService } from 'src/app/pokedex/services/pokemon.service';
 
@@ -47,36 +48,46 @@ export class SnavbarComponent implements OnInit {
 
   fetchPokemonTypes(): void {
     this.pokemonService.getPokemonTypes()
-    .subscribe( resp => {
-      console.log("---resp types: ",resp);
-      this.typesList = resp.results.map( (type: any, index: number) => ({ 
-        value: index + 1,
-        label: type.name}));
-        console.log('Pokemon Types:', this.typesList);
-        
-        this.translatedTypesList = this.typesList.map(type => ({
-          value: type.value,
-          label: this.typeTranslations[type.label] || type.label
-        }));
-        console.log('translatedTypesList:', this.translatedTypesList);
-    });
-
+      .pipe(
+        catchError(error => {
+          console.error('Error en Pokemon types:', error);
+          return of({ results: [] });
+        })
+      )
+      .subscribe(resp => {
+        try {
+          // console.log("---resp types: ", resp);
+          this.typesList = resp.results.map((type: any, index: number) => ({ 
+            value: index + 1,
+            label: type.name 
+          }));
+          console.log('Pokemon Types:', this.typesList);
+          
+          this.translatedTypesList = this.typesList.map(type => ({
+            value: type.value,
+            label: this.typeTranslations[type.label] || type.label
+          }));
+          // console.log('translatedTypesList:', this.translatedTypesList);
+        } catch (error) {
+          console.error('Error processing types:', error);
+        }
+      });
   }
 
   search(value: string) {
     value = value.trim();
-console.log("--en search ", value)
+// console.log("--en search ", value)
     if(value.length == 0) {
       return;
     } else {
-      console.log("en navigate")
+      // console.log("en navigate")
       this.router.navigate(['/search', value])
     }
   }
 
   onTypeSelected(event: any) {
     const selectedValue = event.target.value;
-    console.log("selectedValue: ",selectedValue)
+    // console.log("selectedValue: ",selectedValue)
     if(selectedValue) {
       this.pokemonService.getPokemonByTypes(selectedValue);
     } else {

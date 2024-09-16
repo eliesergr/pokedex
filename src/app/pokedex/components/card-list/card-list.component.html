@@ -3,17 +3,18 @@
   <div class="row g-3">
     <div *ngFor="let pokemon of pokemonsWithImages" class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card custom-card animate_animated animate__fadeIn mb-2 text-center bg-dark fadein">
+
         <img  
           [src]="pokemon?.image | security" [alt]="pokemon?.name"   
           class="cursor custom-card-img" 
-          (click)="loadPokemonData(pokemon.name)"            
-        >
-        
+          (click)="loadPokemonData( pokemon.name )" > 
+          
         <div class="card-body text-white">
           <h5>
             {{ pokemon?.name | uppercase }}
           </h5>
         </div>
+
       </div>
     </div>
   </div>

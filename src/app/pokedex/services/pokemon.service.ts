@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Pokemon, PokemonsResponse } from '../interfaces/pokemons.interfaces';
 import { environment } from '../../../environments/environment';
 import { PokemonData, Species } from '../interfaces/pokemon.interface';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Habilidades } from '../interfaces/habilidades.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -67,37 +67,60 @@ export class PokemonService {
     return this.http.get<PokemonData>(`${ this.serviceUrl }/pokemon/${name}`);
   }
 
-  throwRequest() {
+  throwRequest(): void {
     this.pokemonType = '';
     this.typeFlag = false;
+
     const params = this.getParams(); 
-    console.log("--params used throwRequest: ", params);
-    this.http.get<PokemonsResponse>(`${ this.serviceUrl }/pokemon`, { params })
-    .subscribe( req => {
-      this.pokemonList = req.results;
-       console.log("--req: ",req.results);
-    });
+    // console.log("--params used throwRequest: ", params);
+  
+    this.http.get<PokemonsResponse>(`${this.serviceUrl}/pokemon`, { params })
+      .pipe(
+        catchError(error => {
+          console.error('Error en Pokemon data:', error);
+          return of({ results: [] });
+        })
+      )
+      .subscribe(req => {
+        try {
+          this.pokemonList = req.results;
+          // console.log("--req: ", req.results);
+        } catch (error) {
+          // console.error('Error procesando Pokemon data:', error);
+        }
+      });
   }
 
-  getPokemonByTypes(nameType: string) {
+  getPokemonByTypes(nameType: string): void {
     this.pokemonType = nameType;
+
     this.typeFlag = true;
     const params = this.getParams(); 
-    console.log("--params used getPokemonByTypes: ", params); // Verificar los parámetros utilizados
-    this.http.get<any>(`${ this.serviceUrl }/type/${nameType}`, { params })
+    // console.log("--params used getPokemonByTypes: ", params); 
+  
+    this.http.get<any>(`${this.serviceUrl}/type/${nameType}`, { params })
+      .pipe(
+        catchError(error => {
+          console.error('Error en Pokemon by type:', error);
+          return of({ pokemon: [] }); 
+        })
+      )
       .subscribe(req => {
-        // Adaptar el formato de los Pokémon obtenidos por tipo
-        this.pokemonList = req.pokemon.map((p: any) => ({
-          name: p.pokemon.name,
-          url: p.pokemon.url
-        }));
-
-        const offset = Number(params.get('offset')) || 0;  
-        const limit = Number(params.get('limit')) || environment.PAGE_BREAK;  
-
-        this.pokemonList = this.pokemonList.slice(offset, offset + limit);
-        
-        console.log("--req by type (adaptado): ", this.pokemonList);
+        try {
+          this.pokemonList = req.pokemon.map((p: any) => ({
+            name: p.pokemon.name,
+            url: p.pokemon.url
+          }));
+  
+          const offset = Number(params.get('offset')) || 0;  
+          const limit = Number(params.get('limit')) || environment.PAGE_BREAK;  
+  
+          this.pokemonList = this.pokemonList.slice(offset, offset + limit);
+          
+          // console.log("--req by type (adaptado): ", this.pokemonList);
+        } catch (error) {
+          console.error('-Error procesando Pokemon list by type:', error);
+        }
       });
   }
   

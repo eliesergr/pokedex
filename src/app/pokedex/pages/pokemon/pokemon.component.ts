@@ -3,7 +3,7 @@ import { PokemonService } from '../../services/pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { Habilidades } from '../../interfaces/habilidades.interface';
 import { forkJoin } from 'rxjs';
-import { Species } from '../../interfaces/pokemon.interface';
+// import { Species } from '../../interfaces/pokemon.interface';
 
 @Component({
   selector: 'app-pokemon',
@@ -42,7 +42,7 @@ export class PokemonComponent implements OnInit {
   }
 
   loadPokemonData(name: string): void {
-    this.pokemonService.getPokemonData(name).subscribe(pokemon => {
+    this.pokemonService.getPokemonData( name).subscribe( pokemon => {
       this.animation = pokemon.sprites.versions?.['generation-v']['black-white'].animated?.front_default;
       console.log("--pokemon: ", pokemon);
       this.name = pokemon.name;
@@ -62,9 +62,9 @@ export class PokemonComponent implements OnInit {
       const speedStat = pokemon.stats.find(stat => stat.stat.name === 'speed');
       this.speed = speedStat ? speedStat.base_stat : 0;
 
-      console.log('Ataque físico:', this.attack);
-      console.log('Ataque especial:', this.specialAttack);
-      console.log('Velocidad:', this.speed);
+      // console.log('Ataque físico:', this.attack);
+      // console.log('Ataque especial:', this.specialAttack);
+      // console.log('Velocidad:', this.speed);
 
       // Movimientos
       const movesRequest = pokemon.moves.map((move) =>
