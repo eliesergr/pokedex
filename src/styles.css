@@ -31,19 +31,6 @@ body {
     margin-bottom: 20px;
   }
 
-  .custom-card {
-    width: 350px; 
-    height: 400px; 
-    padding: 5px;  
-    margin: 5px auto; 
-  }
-  
-  .custom-card-img {
-    width: 350px;  
-    height: 350px; 
-    object-fit: cover; 
-  }
-
   .navbar {
     width: 100%;
     height: 80px;
@@ -166,16 +153,16 @@ html, body {
 }
 
 .inline-list {
-  list-style-type: none; /* Elimina los puntos de la lista */
+  list-style-type: none; 
   padding: 0;
   margin: 0;
 }
 
 .inline-list li {
-  display: inline; /* Muestra los elementos en línea */
-  margin-right: 10px; /* Ajusta el espaciado entre elementos */
+  display: inline; 
+  margin-right: 10px; 
 }
 
 .inline-list li:not(:last-child)::after {
-  content: " | "; /* Añade el separador entre los elementos */
+  content: " | "; 
 }
