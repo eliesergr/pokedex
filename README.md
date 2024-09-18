@@ -53,6 +53,7 @@ Ejecute `ng build` para construir el proyecto. Los artefactos de construcción s
 ## Ejecutar en netlify
 
 https://jolly-stardust-9b4626.netlify.app
+https://relaxed-cendol-1db7c3.netlify.app
 
 
 
