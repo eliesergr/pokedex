@@ -25,4 +25,9 @@ export class SidebarComponent {
     this.router.navigate(['/pokemon', tag]);
   }
 
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
+  
+
 }
